@@ -10,7 +10,7 @@ import {
 
 import { Server } from 'socket.io';
 
-@WebSocketGateway()
+@WebSocketGateway({ cors: true })
 export class QueueGateway
   implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
 {
