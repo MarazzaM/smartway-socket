@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Socket.IO Example</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const socket = io('http://localhost:8000');
+
+    // Function to send 'ping' event
+    function sendPing() {
+      console.log('Sending ping...');
+      socket.emit('ping');
+    }
+
+    // When connected, send 'ping' event
+    socket.on('connect', () => {
+      console.log('Connected to Socket.IO server');
+    });
+
+    // Listen for 'pong' event and log the response
+    socket.on('pong', (data) => {
+      console.log('Received response:', data);
+    });
+
+    // Handle disconnect event
+    socket.on('disconnect', () => {
+      console.log('Disconnected from Socket.IO server');
+    });
+
+    // Button click event to trigger 'ping'
+    document.getElementById('pingButton').addEventListener('click', sendPing);
+  });
+</script>
+</head>
+<body>
+  <h1>Socket.IO Example</h1>
+  <p>Check console for responses.</p>
+  <button id="pingButton">Ping</button>
+</body>
+</html>
